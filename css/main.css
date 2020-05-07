@@ -1,0 +1,304 @@
+* {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+/* MARGINS ON SIDES */
+
+.container_landing {
+    margin-left: 20vw;
+    margin-right: 20vw;
+}
+
+/* HEADER WITH NAV AND BRAND */
+
+header {
+    background-color: rgba(255, 255, 255, 0.5);
+    height: 80px;
+}
+
+.nav_brand {
+    margin: 0 20vw 0 20vw;
+    line-height: 80px;
+}
+
+.nav_brand h1 {
+    font-size: 24px;
+    font-weight: 500;
+    display: inline;
+    color: #3F3D56;
+    margin-right: 25vw;
+}
+
+.nav{
+    display: inline;
+}
+
+.nav li{
+    display: inline;
+    padding-left: 25px;
+}
+
+.nav li a{
+    font-weight: 500;
+    font-size: 18px;
+    color: #3F3D56;
+}
+
+#login{
+    width: auto;
+    height: 20px;
+}
+
+/* MAIN LANDING PAGE STUFF */
+
+.landing_text {
+    display: inline;
+    position: absolute;
+    left: 20vw;
+    top: 35vh;
+}
+
+.landing_text h2 {
+    font-weight: 700;
+    font-size: 36px;
+    width: 20vw;
+}
+
+.landing_text p {
+    font-size: 18px;
+    width: 20vw;
+    margin-bottom: 20px;
+}
+
+.landing_text a{
+    background-color: #3F3D56;
+    box-sizing: border-box;
+    border: 2px solid #3F3D56;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 36px;
+    text-decoration: none;
+    margin: 10px 0px;
+    cursor: pointer;
+    transition: all ease-in-out .2s;
+}
+
+.landing_text a:hover{
+    background-color: rgb(87, 84, 117);
+    border-radius: 4px;
+}
+
+.container_landing img {
+    height: auto;
+    max-width: 35vw;
+    position: absolute;
+    right: 20vw;
+    top: 30vh;
+}
+
+/* FORUM PAGE */
+
+#dashboard{
+    width: auto;
+    height: 20px;
+}
+
+#logout{
+    width: auto;
+    height: 20px;
+}
+
+/* REGISTER PAGE & LOGIN PAGE & CONTACT PAGE */
+
+.container_register_login_contact{
+    margin: 0 20vw 0 20vw;
+}
+
+.container_register_login_contact form{
+    position: absolute;
+    top: 25vh;
+    left: 20vw;
+    width: 30vw;
+}
+
+.container_register_login_contact form h4{
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0;
+}
+.container_register_login_contact form p{
+    margin-bottom: 10px;
+}
+
+.container_register_login_contact form input{
+    display: block;
+    margin-top: 10px;
+    font-family: 'Roboto', 'FontAwesome', sans-serif;
+}
+
+#Name{
+    background-image: url('../img/user_vector.svg');
+    width: 20vw;
+}
+#Mail{
+    background-image: url('../img/email_vector.svg');
+    width: 20vw;
+}
+#Adress{
+    background-image: url('../img/house_vector.svg');
+    width: 20vw;
+}
+#Phone{
+    background-image: url('../img/phone_vector.svg');
+    width: 20vw;
+}
+#Phone::-webkit-inner-spin-button,
+#Phone::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -o-appearance: none;
+    appearance: nteone;
+}
+#cMessage{
+    background-image: url('../img/message_vector.svg');
+    background-size: 30px;
+    background-position: 7px 8px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 12px 20px 12px 45px;
+    transition: all ease-in-out .2s;
+    color: #3F3D56 ;
+    width: 20vw;
+    resize: none;
+    display: block;
+    margin-top: 10px;
+    font-family: 'Roboto', 'FontAwesome', sans-serif;
+}
+#cMessage:focus{
+    outline: none;
+    border: 2px solid #3F3D56;
+}
+
+.pass{
+    background-image: url('../img/key_vector.svg');
+    width: 20vw;
+}
+
+.container_register_login_contact form input{
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    background-position: 5px 5px; 
+    background-repeat: no-repeat;
+    background-size: 35px;
+    font-size: 16px;
+    padding: 12px 20px 12px 45px;
+    transition: all ease-in-out .2s;
+    color: #3F3D56 ;
+}
+
+.container_register_login_contact form input:focus{
+    outline: none;
+    border: 2px solid #3F3D56;
+}
+
+.flname{
+    display: inline !important;
+    background-image: url('../img/user_vector.svg');
+    width: 9.90vw;
+}
+
+.container_register_login_contact form button{
+    background-color: #3F3D56;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 36px;
+    text-decoration: none;
+    margin: 10px 0px;
+    cursor: pointer;
+}
+
+.container_register_login_contact img{
+    height: auto;
+    max-width: 35vw;
+    position: absolute;
+    right: 15vw;
+    top: 25vh;
+}
+
+/* MISC */
+
+#watermark{
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    color: rgb(212, 211, 211);
+}
+
+/* DASHBOARD */
+
+/* EDIT PROFILE CHANGE PASSWORD BUTTON */
+#edit_profile_button, #change_password_button{
+    background-color: #3F3D56;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 36px;
+    text-decoration: none;
+    margin: 10px 0px;
+    cursor: pointer;
+    transition: all ease-in-out .2s;
+}
+#edit_profile_button:hover, #change_password_button:hover{
+    background-color: rgb(109, 106, 150);
+}
+
+#edit_profile_button{
+    position: absolute;
+    top: 20vh;
+    left: 20vw;
+}
+#change_password_button{
+    position: absolute;
+    top: 25vh;
+    left: 20vw;
+}
+
+.go_dashboard_back{
+    position: absolute;
+    top: 15vh;
+    left: 20vw;
+    background-color: #3F3D56;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 7px 36px;
+    text-decoration: none;
+    margin: 10px 0px;
+    cursor: pointer;
+    transition: all ease-in-out .2s;
+}
+
+.go_dashboard_back:hover{
+    background-color: rgb(77, 74, 105);
+    
+    color: white;
+}
