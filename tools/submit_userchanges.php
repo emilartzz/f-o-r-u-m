@@ -8,6 +8,7 @@ if (isset($_POST['admin_submit_userchanges'])) {
 
     $uID = $_SESSION['auID'];
     $ogName = $_SESSION['auName'];
+    /* VARIABLER FRÅN TIDIGARE FORM */
     $uFName = $_POST['auFName'];
     $uLName = $_POST['auLName'];
     $uName = $_POST['auName'];
@@ -16,7 +17,9 @@ if (isset($_POST['admin_submit_userchanges'])) {
     $uPhone = $_POST['auPhone'];
     $uRole = $_POST['aRole'];
 
+    /* DEBUG
     echo ' ' . $_SESSION['auID'] . ' ' . $uFName . ' ' . $uLName . ' ' . $uName . ' ' . $uMail . ' ' . $uAdress . ' ' . $uPhone . ' ' . $uRole;
+    */
 
     if (empty($uFName) || empty($uLName) || empty($uName) || empty($uMail) || empty($uAdress) || empty($uPhone)){
         header("Location: ../admin.php?error=emptyFields&uid=" . $uName . "&mail=" . $uMail);
@@ -35,7 +38,7 @@ if (isset($_POST['admin_submit_userchanges'])) {
         exit();
     }
     else {
-
+        /* KOLLAR IFALL MAN BYTT ANVÄNDARNAMN */
         if ($uName != $ogName) {
             $sql = "SELECT uName FROM forumusers WHERE uName=?;";
             $stmt = mysqli_stmt_init($conn);
@@ -48,12 +51,13 @@ if (isset($_POST['admin_submit_userchanges'])) {
             mysqli_stmt_execute($stmt);
             mysqli_stmt_store_result($stmt);
             $resultCheck = mysqli_stmt_num_rows($stmt);
+            /* KOLLAR IFALL NÅGON REDAN HAR ANVÄNDARNAMNET */
             if ($resultCheck > 0){
                 header("Location: ../admin.php?error=userTaken&mail=" . $uMail);
                 exit();
             }
             else {
-                
+                /* UPDATERAR INFO */
                 $sql = "UPDATE forumusers SET uFName='$uFName', uLName='$uLName', uName='$uName', uMail='$uMail', uAdress='$uAdress', uPhone='$uPhone', uRole='$uRole' WHERE uID='$uID'";
 
                 if (mysqli_query($conn, $sql)) {
@@ -68,7 +72,7 @@ if (isset($_POST['admin_submit_userchanges'])) {
         }
     }
         else {
-            
+            /* UPDATERAR INFO */
             $sql = "UPDATE forumusers SET uFName='$uFName', uLName='$uLName', uName='$uName', uMail='$uMail', uAdress='$uAdress', uPhone='$uPhone', uRole='$uRole' WHERE uID='$uID'";
 
             if (mysqli_query($conn, $sql)) {

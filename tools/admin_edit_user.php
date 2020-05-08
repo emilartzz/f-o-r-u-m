@@ -27,29 +27,30 @@
             <p>Change the info you want</p>
  
  <?php 
- 
+ /* KOLLAR OM EDIT USER BUTTON IS CLICKED */
  if (isset($_GET['a_edit_user'])) {
 
     
 
     session_start();
-
+    /* KOLLAR SÅ MAN ÄR ADMIN */
     if ($_SESSION['uRole'] != 1) {
         header('Location: ../dashboard.php'); 
     }
  
     require "db_conn.php";
- 
+    /* KOLLAR USER ID FRÅN FÖRRA FORM */
     $uID = $_GET['admin_select_user'];
-
+    /* KOLLAR OM NÅGOT ÄR TOMT */
     if (empty($uID)){
         header("Location: ../admin.php?error=emptyFields&uid=" . $uName);
         exit();
     }
     else {
+        /* SELECT USER DÄR UID = $UID */
             $sql = "SELECT uID, uFName, uLName, uName, uMail, uAdress, uPhone, uPass, uRole FROM forumusers WHERE uID=$uID";
             $result = $conn->query($sql);
-
+            /* SKRIVER UT ALLT SOM HITTATS */
             if ($result->num_rows > 0) {
 
                 $row = $result->fetch_assoc();
@@ -88,9 +89,9 @@
                     ';
                     break;
             }
+            /* SKICKAR TILL NÄSTA SIDA SOM SPARAR ALLT */
         echo'
          </select>
-
          <button type="submit" name="admin_submit_userchanges">Confirm</button>
 
 
