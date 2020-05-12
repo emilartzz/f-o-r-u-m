@@ -241,7 +241,7 @@ header {
 /* MISC */
 
 #watermark{
-    position: absolute;
+    position: fixed;
     bottom: 10px;
     left: 10px;
     color: rgb(212, 211, 211);
@@ -301,4 +301,127 @@ header {
     background-color: rgb(77, 74, 105);
     
     color: white;
+}
+
+/* FORUM */
+
+.newPost{
+    position: absolute;
+    top: 22.5vh;
+    right: 14vw;
+    background-color: #3F3D56;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 7px 36px;
+    text-decoration: none;
+    margin: 10px 0px;
+    cursor: pointer;
+    transition: all ease-in-out .2s;
+}
+
+.featured_posts{
+    background-color: rgba(202, 202, 202, 0.2);
+    width: 70vw;
+    position: absolute;
+    top: 30vh;
+    left: 15%;
+    border-radius: 10px 10px 0 0;
+}
+
+.post_container{
+    border-bottom: 2px solid rgba(63, 61, 86, 0.5);
+    width: 90%;
+    margin: 2% auto 10px auto;
+}
+
+.post_title{
+    font-size: 22px;
+    color: #3F3D56;
+}
+.post_title:hover{
+    text-decoration: underline;
+}
+
+.post_desc{
+    color: #ccc;
+    font-size: 12px;
+    padding-bottom: 10px;
+}
+
+.post_owner{
+    display: inline !important;
+}
+
+/* NEW POST FORM */
+
+.new_post_container{
+    margin: 15vh auto 0 auto;
+    width: 20vw;
+}
+
+
+.new_post_container form h4{
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0;
+}
+.new_post_container form p{
+    margin-bottom: 10px;
+}
+
+.new_post_container input{
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    background-position: 5px 5px; 
+    background-repeat: no-repeat;
+    background-size: 35px;
+    font-size: 16px;
+    padding: 12px 12px 12px 12px;
+    transition: all ease-in-out .2s;
+    color: #3F3D56 ;
+    outline: none;
+    width: 20vw;
+}
+
+.new_post_container textarea{
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 12px 12px 12px 12px;
+    transition: all ease-in-out .2s;
+    color: #3F3D56 ;
+    width: 20vw;
+    resize: none;
+    display: block;
+    margin-top: 10px;
+    font-family: 'Roboto', 'FontAwesome', sans-serif;
+    outline: none;
+}
+
+.new_post_container button{
+    background-color: #3F3D56;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 36px;
+    text-decoration: none;
+    margin: 10px 0px;
+    cursor: pointer;
+}
+
+.new_post_container input:focus, .new_post_container textarea:focus{
+    outline: none;
+    border: 2px solid #3F3D56;
 }
