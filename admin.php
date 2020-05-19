@@ -109,7 +109,7 @@ require 'tools/check_account.php';
             
         </form>
 
-        <form action="./tools/disable_or_delete_user.php" method="get" onSubmit="return confirm('Do you want to submit?') ">
+        <form action="./tools/disable_or_delete_user.php" method="post" onSubmit="return confirm('Do you want to submit?') ">
             <?php
 
             require "./tools/db_conn.php";
@@ -119,7 +119,7 @@ require 'tools/check_account.php';
 
             if ($result->num_rows > 0) {
 
-            echo '<select name="admin_select_user" class="disableUser">';
+            echo '<select name="admin_select_user_2" class="disableUser">';
             while ($row = $result->fetch_assoc()) {
 
                 if ($row['uDisabled'] == 0) {
