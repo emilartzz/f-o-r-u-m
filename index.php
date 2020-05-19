@@ -1,4 +1,11 @@
-<?php session_start(); require_once "tools/water_user.php"; ?>
+<?php session_start(); require_once "tools/water_user.php"; 
+
+if (isset($_SESSION['uID'])) {
+    require 'tools/check_account.php';
+}
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="sv">

@@ -39,6 +39,8 @@ if (isset($_POST['login_submit'])) {
                     $_SESSION['uPhone'] = $row['uPhone'];
                     $_SESSION['uRole'] = $row['uRole'];
 
+                    require 'check_account.php';
+
                     header("Location: ../index.php?login=success");
                     exit();
                 }

@@ -11,6 +11,8 @@ else {
     }
 }
 
+require 'tools/check_account.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -106,7 +108,45 @@ else {
 
             
         </form>
-    </div>
+
+        <form action="./tools/disable_or_delete_user.php" method="get" onSubmit="return confirm('Do you want to submit?') ">
+            <?php
+
+            require "./tools/db_conn.php";
+            
+            $sql = "SELECT uID, uFName, uLName, uName, uMail, uAdress, uPhone, uPass, uRole, uDisabled FROM forumusers";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+
+            echo '<select name="admin_select_user" class="disableUser">';
+            while ($row = $result->fetch_assoc()) {
+
+                if ($row['uDisabled'] == 0) {
+                    $uDisabledColor = "green";
+                    $uDisabled = "Active";
+                }
+                else {
+                    $uDisabledColor = "red";
+                    $uDisabled = "Disabled";
+                }
+
+                echo '<option style="color:' . $uDisabledColor . '" value="' . $row['uID'] . '">' . " [" . $uDisabled . '] ' . $row['uName'] . '</option>';
+            }
+            echo '</select> ';
+
+            } else {
+            echo "0 results";
+}
+            $conn->close();
+            ?>
+
+            <button type="submit" name="a_disable" class="submit_disabled">Toggle</button>
+            <button type="submit" name="a_delete" class="submit_delete">Delete</button>
+
+        </form>
+
+        </div>
 
     <!-- Link Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

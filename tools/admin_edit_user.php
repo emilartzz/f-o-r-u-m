@@ -92,7 +92,11 @@
             /* SKICKAR TILL NÄSTA SIDA SOM SPARAR ALLT */
         echo'
          </select>
-         <button type="submit" name="admin_submit_userchanges">Confirm</button>
+        
+        
+         '/*<label for="uDisabled" style="display:inline;">Disabled</label>
+         <input type="checkbox" name="uDisabled" id="uDisabled" style="display:inline;" value="1">
+         <button type="submit" name="admin_submit_userchanges" style="display: block;">Confirm</button>*/'
 
 
      </form>
@@ -110,5 +114,4 @@
 }
  
  ?>
-
  <!-- $row["uRole"] -->

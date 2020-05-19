@@ -341,8 +341,35 @@ header {
 .post_title{
     font-size: 22px;
     color: #3F3D56;
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    cursor: pointer;
 }
-.post_title:hover{
+
+.edit_post{
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #3F3D56;
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    cursor: pointer;
+}
+
+.del_post{
+    margin: 10px 0 0 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(197, 82, 82);
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    cursor: pointer;
+}
+
+.post_title:hover, .edit_post:hover{
     text-decoration: underline;
 }
 
@@ -354,6 +381,14 @@ header {
 
 .post_owner{
     display: inline !important;
+}
+
+.post_body{
+    width: 100%;
+    margin-top: 10px;
+    font-size: 16px;
+    padding-top: 10px;
+    word-break: break-all;
 }
 
 /* NEW POST FORM */
@@ -424,4 +459,77 @@ header {
 .new_post_container input:focus, .new_post_container textarea:focus{
     outline: none;
     border: 2px solid #3F3D56;
+}
+
+/* EDIT POST */
+
+.edit_post_container{
+    width: 90%;
+    margin: 2% auto 10px auto;
+}
+
+.edit_post_container form{
+    position: absolute;
+    top: 25vh;
+    left: 25vw;
+    width: 50vw;
+}
+
+.edit_post_container h4{
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.edit_post_container p{
+    margin-bottom: 10px;
+}
+
+.edit_post_title{
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    background-position: 5px 5px; 
+    background-repeat: no-repeat;
+    background-size: 35px;
+    font-size: 16px;
+    padding: 12px 12px 12px 12px;
+    transition: all ease-in-out .2s;
+    color: #3F3D56 ;
+    outline: none;
+    width: 40vw;
+}
+
+.edit_post_body{
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 12px 12px 12px 12px;
+    transition: all ease-in-out .2s;
+    color: #3F3D56 ;
+    width: 40vw;
+    height: 45vh;
+    resize: none;
+    display: block;
+    margin-top: 10px;
+    font-family: 'Roboto', 'FontAwesome', sans-serif;
+    outline: none;
+}
+
+.edit_post_submit{
+    background-color: #3F3D56;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px 36px;
+    text-decoration: none;
+    margin: 10px 0px;
+    cursor: pointer;
 }

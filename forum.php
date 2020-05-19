@@ -1,5 +1,7 @@
 <?php session_start(); 
 
+require 'tools/check_account.php';
+
 require_once "tools/water_user.php";
 
 if (!isset($_SESSION['uID'])) {
@@ -14,7 +16,7 @@ if (!isset($_SESSION['uID'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F-O-R-U-M</title>
+    <title>F-O-R-U-M | Forum</title>
 
     <!-- Link CSS -->
     <link rel="stylesheet" href="css/bulma.css">
@@ -30,7 +32,7 @@ if (!isset($_SESSION['uID'])) {
     <header>
 
         <div class="nav_brand">
-            <h1>F ─ O ─ R ─ U ─ M</h1>
+            <h1> F ─ O ─ R ─ U ─ M</h1>
 
             <ul class="nav">
                 <li><a href="index.php">Home</a></li>
@@ -74,19 +76,19 @@ if (!isset($_SESSION['uID'])) {
             //echo '<p class="p_desc">' . substr($row['p_body'], 0,50) . "...</p>";
             while ($row = $result->fetch_assoc()) {
                 //echo ' ' . $row['p_id'] . ' ' . $row['p_title'] . ' ' . $row['p_body'] . ' ' . $row['p_owner'];
-
+                echo '<form action="./posts.php" method="get">';
                 echo '<div class="post_container">';
-                echo '<a href="./posts/'. $row['p_id'] . '.php" class="post_title">' . $row['p_title'] . '</a>';
-                echo '<p class="post_desc">' . substr($row['p_body'], 0,50) . '</p>';
-                echo '</div>';
+                echo '<input type="text" name="posts_id" style="display: none;" value="' . $row['p_id'] . '">';
+                //echo '<p href="./posts.php" class="post_title">' . $row['p_title'] . '</a>';
+                echo '<button type="submit" name="show_post" class="post_title">' . $row['p_title'] . '</button>';
+                echo '<p class="post_desc">' . substr($row['p_body'], 0,50) . '...</p>';
+                echo '</div></form>';
             }
             } else {
             echo "No Posts";
             }
             $conn->close();
             ?>
-
-
 
             </div>
 

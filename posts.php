@@ -1,8 +1,11 @@
-<?php session_start(); require_once "tools/water_user.php"; require 'tools/check_account.php';
+<?php session_start(); require_once "tools/water_user.php";
 
 if (!isset($_SESSION['uID'])) {
-    header('Location: ./login.php'); 
+    header('Location: ./login.php');
 }
+
+require 'tools/check_account.php';
+
 
 ?>
 
@@ -12,10 +15,7 @@ if (!isset($_SESSION['uID'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F-O-R-U-M | Userpanel</title>
-
-    <!-- Link Fontawesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <title>F-O-R-U-M</title>
 
     <!-- Link CSS -->
     <link rel="stylesheet" href="css/bulma.css">
@@ -32,7 +32,6 @@ if (!isset($_SESSION['uID'])) {
 
         <div class="nav_brand">
             <h1>F ─ O ─ R ─ U ─ M</h1>
-
             <?php 
                 if (!isset($_SESSION['uID'])) {
                     echo'
@@ -69,11 +68,39 @@ if (!isset($_SESSION['uID'])) {
 
     </header>
 
-    <div class="container_register_login_contact">
+    <div class="show_post_container">
 
-        <a href="./edit_profile.php" id="edit_profile_button">Edit Profile</a>
-        <a href="./change_password.php" id="change_password_button">Change Password</a>
-        <img src="./img/dashboard_illustration.svg" alt="Contact illustration">
+    <div class="featured_posts">
+
+<?php
+
+require "./tools/db_conn.php";
+
+$sql = "SELECT  p_id, p_title, p_body, p_owner FROM forumposts WHERE p_id=" . $_GET['posts_id'] . ";";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+$row = $result->fetch_assoc();
+
+    echo '<form action="./edit_post.php" method="get">';
+    echo '<input type="text" name="posts_id" style="display: none;" value="' . $row['p_id'] . '">';
+    echo '<div class="post_container">';
+    echo '<a href="#" class="post_title">' . $row['p_title'] . '</a>';
+    echo '<p class="post_body">' . $row['p_body'] . '</p>';
+    if ($row['p_owner'] == $_SESSION['uID'] || $_SESSION['uRole'] == 1) {
+        echo '<button type="submit" name="edit_post" class="edit_post">Edit Post</button>';
+        echo '<button type="submit" name="del_post" class="del_post">Delete Post</button>';   
+    }
+    echo '</div></form>';
+
+} else {
+echo "No Posts";
+}
+$conn->close();
+?>
+
+</div>
 
     </div>
 

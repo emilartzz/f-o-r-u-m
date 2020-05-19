@@ -1,13 +1,11 @@
-<?php session_start(); require_once "tools/water_user.php"; 
+<?php session_start(); require_once "tools/water_user.php"; require "tools/db_conn.php"; 
+
 
 if (!isset($_SESSION['uID'])) {
     header('Location: ./login.php');
 }
 
-require 'tools/check_account.php';
-
-
-?>
+require 'tools/check_account.php'; ?>
 
 <!DOCTYPE html>
 <html lang="sv">
@@ -15,10 +13,7 @@ require 'tools/check_account.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F-O-R-U-M | Change Password</title>
-
-    <!-- Link Fontawesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <title>F-O-R-U-M | Edit Post</title>
 
     <!-- Link CSS -->
     <link rel="stylesheet" href="css/bulma.css">
@@ -35,7 +30,6 @@ require 'tools/check_account.php';
 
         <div class="nav_brand">
             <h1>F ─ O ─ R ─ U ─ M</h1>
-
             <?php 
                 if (!isset($_SESSION['uID'])) {
                     echo'
@@ -72,33 +66,78 @@ require 'tools/check_account.php';
 
     </header>
 
-    <div class="container_register_login_contact">
+    <div class="edit_post_container">
 
-    <a class="go_dashboard_back" href="./dashboard.php">Back</a>
+    <form action="./tools/submit_post_changes.php" method="post" onSubmit="return confirm('Confirm changes.')">
 
-        <form action="#" method="post">
-
-            <h4>Change password</h4>
-            <p>Enter your new password below</p>
-
-            <?php 
- 
-            require "./tools/db_conn.php";
-            $uID = $_SESSION['uID'];
-            /* CHECK IF USER = LOGGED IN ; CHECK PASSWORD ; CHECK IF ALL */
-            ?>
-
-            <input class="pass" type="password" name="uPass" id="Pass" placeholder="Password" required>
-            <input class="pass" type="password" name="uVPass" id="VPass" placeholder="Retype Password" required> 
-
-            <button type="submit" name="submit_changed_password">Change password</button>
+        <h4>Edit Post</h4>
+            <p>Enter any info below</p>
 
 
-        </form>
-        <img id="edit_profile" src="img/security_illustration.svg" alt="Change password"></a>
-        <!-- <img class="edit_profile_pic" src="./img/userpics/.png" alt="Contact illustration"> -->
+<?php
 
-    </div>
+if (!isset($_SESSION['uID'])) {
+    header('Location: ./login.php'); 
+}
+else {
+
+    $sql = "SELECT  p_owner FROM forumposts WHERE p_id=" . $_GET['posts_id'] . ";";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+
+        $row = $result->fetch_assoc();
+
+        if ($_SESSION['uID'] == $row['p_owner'] || $_SESSION['uRole'] == 1) {
+            
+            if (isset($_GET['del_post'])){
+                $sql = "DELETE FROM forumposts WHERE p_id=" . $_GET['posts_id'] . ";";
+            
+            if ($conn->query($sql) === TRUE) {
+              header('Location: ./forum.php');
+            } else {
+              echo "Error deleting record: " . $conn->error;
+            }
+            
+            $conn->close();
+            }
+
+
+        }
+        else {
+            header('Location: ./forum.php');
+        }
+
+    }
+    else {
+        echo "Error...";
+        }
+        $conn->close();
+
+}
+
+require "./tools/db_conn.php";
+
+$sql = "SELECT p_id, p_title, p_body, p_owner FROM forumposts WHERE p_id=" . $_GET['posts_id'] . ";";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+$row = $result->fetch_assoc();
+
+echo '<input type="text" name="post_id" required value="' . $row["p_id"] . '" style="display: none;">';
+    echo '<input class="edit_post_title" type="text" name="post_title" required value="' . $row["p_title"] . '">';
+    echo '<textarea class="edit_post_body" type="text" name="post_body" required cols="30" rows="10">' . $row["p_body"] . '</textarea>';
+    echo '<button type="submit" name="submit_edit_post" class="edit_post_submit">Save</button>';
+
+} else {
+echo "No Posts";
+}
+$conn->close();
+?>
+
+</div>
+
 
     <!-- Link Scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
