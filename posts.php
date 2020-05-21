@@ -110,26 +110,44 @@ $p_id;
     </div>
 
     <div class="comments">
+        
+            <div class="add_comment">
+        
+            <form action="./tools/post_comment.php" method="get">
+
+                <h3>Comment</h3>
+                <input type="text" name="posts_id" style="display: none;" value="<?php echo $row['p_id'] ?>">
+
+                <textarea name="cBody" id="" cols="50" rows="4"></textarea>
+
+                <input type="submit" name="submit_comment" value="Submit" id="submit_comment">
+            
+            
+            </form>
+        
+        </div>
+
+        <div class="posted_comments">
 
         <?php
 
         require_once "./tools/db_conn.php";
                     
-        $sql = "SELECT cID, cOwner, cBody, cPost FROM forumcomments WHERE cPost=";
+        $sql = "SELECT cID, cOwner, cOwnerID, cBody, cPost FROM forumcomments WHERE cPost=$p_id";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
 
         while ($row = $result->fetch_assoc()) {
            
-            echo '<form action="./edit_post.php" method="get">';
-            echo '<input type="text" name="posts_id" style="display: none;" value="' . $row['p_id'] . '">';
-            echo '<div class="post_container">';
-            echo '<a href="#" class="post_title">' . $row['p_title'] . '</a>';
-            echo '<p class="post_body">' . $row['p_body'] . '</p>';
-            if ($row['p_owner'] == $_SESSION['uID'] || $_SESSION['uRole'] == 1) {
-                echo '<button type="submit" name="edit_post" class="edit_post">Edit Post</button>';
-                 echo '<button type="submit" name="del_post" class="del_post">Delete Post</button>';   
+            echo '<form action="./tools/del_comment.php" method="get">';
+            echo '<div class="posted_comments_each">';
+            echo '<input type="text" name="comment_id" style="display: none;" value="' . $row['cID'] . '">';
+            echo '<input type="text" name="cOwnerID" style="display: none;" value="' . $row['cOwnerID'] . '">';
+            echo '<a href="#" class="comment_owner">' . $row['cOwner'] . '</a>';
+            echo '<p class="comment_body">' . $row['cBody'] . '</p>';
+            if ($row['cOwnerID'] == $_SESSION['uID'] || $_SESSION['uRole'] == 1) {
+                 echo '<button type="submit" name="del_comment" class="del_comment">Delete</button>';   
             }
             echo '</div></form>';
         }
@@ -139,19 +157,6 @@ $p_id;
 
         ?>
 
-        <div class="add_comment">
-        
-            <form action="./tools/post_comment.php" method="get">
-            
-                <input type="text" name="cID" value="<?php echo $_SESSION['uID']; ?>" style="display: none;">
-
-                <textarea name="cBody" id="" cols="50" rows="4"></textarea>
-
-                <button type="submit" name="submit_comment">Submit</button>
-            
-            
-            </form>
-        
         </div>
 
     </div>

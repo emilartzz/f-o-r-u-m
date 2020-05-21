@@ -4,16 +4,18 @@
     if (!isset($_SESSION['uID'])) {
         header("Location: ../login.php");
     }
-    if (isset($_POST['submit_comment'])) {
+    if (isset($_GET['submit_comment'])) {
 
-        $title = $_POST['new_p_title'];
-        $body = $_POST['new_p_body'];
-        if (empty($title) || empty($body)) {
+        $cBody = $_GET['cBody'];
+        $cPost = $_GET['posts_id'];
+        $cOwner = $_SESSION['uName'];
+        $cOwnerID = $_SESSION['uID'];
+        if (empty($cBody) || empty($cPost) || empty($cOwner)) {
             header("Location: ../forum.php?error=emptyFields");
         }
         else {
             require 'db_conn.php';
-            $sql = "INSERT INTO forumcomments (, p_body, p_owner) VALUES (?, ?, ?);";
+            $sql = "INSERT INTO forumcomments (cOwner, cOwnerID, cBody, cPost) VALUES (?,?,?,?);";
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)){
                     header("Location: ../forum.php?error=sqlError");
@@ -21,7 +23,7 @@
                 }
                 else {
 
-                    mysqli_stmt_bind_param($stmt, "sss", $title, $body, $_SESSION['uID']);
+                    mysqli_stmt_bind_param($stmt, "ssss", $cOwner, $cOwnerID, $cBody, $cPost);
                     mysqli_stmt_execute($stmt);
                     header("Location: ../forum.php?success=posted");
                     exit();

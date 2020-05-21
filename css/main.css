@@ -553,12 +553,7 @@ header {
     top: 30vh;
     left: 61vw;
     border-radius: 10px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-.add_comment{
-
+    overflow: hidden;
 }
 
 .add_comment textarea{
@@ -579,7 +574,7 @@ header {
     display: inline;
 }
 
-.add_comment button{
+.add_comment #submit_comment{
     background-color: #3F3D56;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -592,4 +587,40 @@ header {
     margin: 0px 0px;
     cursor: pointer;
     display: inline;
+}
+
+.posted_comments{
+    width: 35vw;
+    height: 40vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.posted_comments_each{
+    border: solid 1px rgba(0, 0, 0, 0.418);
+    border-radius: 5px;
+    padding: 5px 5px 5px 10px;
+    width: 90%;
+}
+
+.posted_comments .comment_owner{
+    color: #212121;
+    font-weight: 500;
+}
+
+.posted_comments .comment_body{
+    font-size: 110%;
+    width: 100%;
+    word-break: break-all;
+}
+
+.del_comment{
+    margin: 10px 0 0 2px;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: rgb(197, 82, 82);
+    border: none;
+    padding: 3px!important;
+    border-radius: 2px;
+    cursor: pointer;
 }
