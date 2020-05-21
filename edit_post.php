@@ -101,6 +101,14 @@ else {
             } else {
               echo "Error deleting record: " . $conn->error;
             }
+            // TA BORT ALLA KOMMENTARER TILL DEN POSTEN
+            $sql_comments = "DELETE FROM forumcomments WHERE cPost=" . $_GET['posts_id'] . ";";
+
+            if ($conn->query($sql_comments) === TRUE) {
+                header('Location: ./forum.php');
+              } else {
+                echo "Error deleting record: " . $conn->error;
+              }
             
             $conn->close();
             }
