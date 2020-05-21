@@ -70,7 +70,7 @@ if (!isset($_SESSION['uID'])) {
     </header>
 
     <div class="container_register_login_contact">
-
+        <!-- VISA KNAPPARNA -->
         <a href="./edit_profile.php" id="edit_profile_button">Edit Profile</a>
         <a href="./change_password.php" id="change_password_button">Change Password</a>
         <img src="./img/dashboard_illustration.svg" alt="Contact illustration">

@@ -5,7 +5,10 @@ if (!isset($_SESSION['uID'])) {
     header('Location: ./login.php');
 }
 
-require 'tools/check_account.php'; ?>
+require 'tools/check_account.php'; 
+
+// SAMMA ^
+?>
 
 <!DOCTYPE html>
 <html lang="sv">
@@ -75,21 +78,21 @@ require 'tools/check_account.php'; ?>
 
 
 <?php
-
+// KOLLA OM INLOGG
 if (!isset($_SESSION['uID'])) {
     header('Location: ./login.php'); 
 }
 else {
-
+    // SELECT INFO FRÅN FORUMPOSTS
     $sql = "SELECT  p_owner FROM forumposts WHERE p_id=" . $_GET['posts_id'] . ";";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
 
         $row = $result->fetch_assoc();
-
+        // KOLLA OM DET ÄR ÄGAREN ELLER EN ADMIN SOM FÖRSÖKER REDIGERA
         if ($_SESSION['uID'] == $row['p_owner'] || $_SESSION['uRole'] == 1) {
-            
+            // OM ANVÄNDAREN KLICKADE DELETE PÅ FÖRRA SIDAN, TA DÅ BORT INLÄGG OCH GÅ TILLBAKS TILL FORUM.PHP
             if (isset($_GET['del_post'])){
                 $sql = "DELETE FROM forumposts WHERE p_id=" . $_GET['posts_id'] . ";";
             
@@ -115,7 +118,7 @@ else {
         $conn->close();
 
 }
-
+// ANNARS KÖR REDIGERA STUFF
 require "./tools/db_conn.php";
 
 $sql = "SELECT p_id, p_title, p_body, p_owner FROM forumposts WHERE p_id=" . $_GET['posts_id'] . ";";
@@ -124,10 +127,11 @@ $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 
 $row = $result->fetch_assoc();
-
+// SKRIV UT ALL INFO OM POSTEN
 echo '<input type="text" name="post_id" required value="' . $row["p_id"] . '" style="display: none;">';
     echo '<input class="edit_post_title" type="text" name="post_title" required value="' . $row["p_title"] . '">';
     echo '<textarea class="edit_post_body" type="text" name="post_body" required cols="30" rows="10">' . $row["p_body"] . '</textarea>';
+    // SKICKA VIDARE
     echo '<button type="submit" name="submit_edit_post" class="edit_post_submit">Save</button>';
 
 } else {

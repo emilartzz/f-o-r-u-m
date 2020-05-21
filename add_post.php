@@ -72,7 +72,7 @@ require 'tools/check_account.php';
     </header>
 
     <div class="new_post_container">
-
+        <!-- DEFAULT STUFF SÅSOM POST BODY OSV I ETT FORM  BASIC STUFF -->
         <form action="./tools/new_post_db.php" method="post">
 
             <h4>New Post</h4>

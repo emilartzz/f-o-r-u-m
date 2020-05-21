@@ -1,17 +1,19 @@
 <?php 
-
+    // KOLLAR INLOGG OCH KNAPP SOM VANLIGT
     session_start();
     if (!isset($_SESSION['uID'])) {
         header("Location: ../login.php");
     }
     if (isset($_POST['post_new'])) {
-
+        // SPARAR VARIABLER
         $title = $_POST['new_p_title'];
         $body = $_POST['new_p_body'];
+        // KOLLAR TOMT
         if (empty($title) || empty($body)) {
             header("Location: ../add_post.php?error=emptyFields");
         }
         else {
+            // OM ALLT ÄR BRA GÅR VIDARE MED ATT SKICKA IN INFO OSV.
             require 'db_conn.php';
             $sql = "INSERT INTO forumposts (p_title, p_body, p_owner) VALUES (?, ?, ?);";
                 $stmt = mysqli_stmt_init($conn);

@@ -70,7 +70,7 @@ if (isset($_SESSION['uID'])) {
     </header>
 
     <div class="container_register_login_contact">
-
+                                <!-- ONSUMBIT KOLLA OM MAN VERKLIGEN VILL SKICKA -->
         <form action="#" onSubmit="alert('Work in progress, Feature coming soon!');" method="post">
 
             <h4>Contact</h4>

@@ -1,7 +1,9 @@
 <?php session_start(); 
 
+// SKICKA UT ETT WATERMARK MED ANVÄNDARENS INFO
 require_once "tools/water_user.php";
 
+// KOLLA OM ANVÄNDARE INLOGGAD
 if (isset($_SESSION['uID'])) {
     header('Location: ./forum.php'); 
 }
@@ -47,7 +49,7 @@ if (isset($_SESSION['uID'])) {
     </header>
 
     <div class="container_register_login_contact">
-
+        <!-- LOGIN FORM SKAPAS -->
         <form action="./tools/login_db.php" method="post">
 
             <h4>Login</h4>

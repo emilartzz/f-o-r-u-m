@@ -1,9 +1,9 @@
 <?php
-
+// KOLLAR KNAPP RÄTT? "register_submit"
 if (isset($_POST['register_submit'])) {
  
     require "db_conn.php";
-
+    // VARIABLER
     $uFName = $_POST['uFName'];
     $uLName = $_POST['uLName'];
     $uName = $_POST['uName'];
@@ -13,7 +13,7 @@ if (isset($_POST['register_submit'])) {
     $uPass = $_POST['uPass'];
     $uVerPass = $_POST['uVPass'];
     $member = 0;
-
+    // KOLLAR SÅ ALL INFO FINNS OCH ÄR MED RIKTIGA BOKSTÄVER OSV LINE 17-36
     if (empty($uFName) || empty($uLName) || empty($uName) || empty($uMail) || empty($uAdress) || empty($uPhone) || empty($uPass) || empty($uVerPass)){
         header("Location: ../register.php?error=emptyFields&uid=" . $uName . "&mail=" . $uMail);
         exit();
@@ -35,6 +35,7 @@ if (isset($_POST['register_submit'])) {
         exit();
     }
     else {
+        // SELECT UNAME OCH KOLLA OM ANVÄNDARNAMNER ÄR TAGET LINE 39-53
         $sql = "SELECT uName FROM forumusers WHERE uName=?;";
         $stmt = mysqli_stmt_init($conn);
         if (!mysqli_stmt_prepare($stmt, $sql)){
@@ -50,8 +51,9 @@ if (isset($_POST['register_submit'])) {
                 header("Location: ../register.php?error=userTaken&mail=" . $uMail);
                 exit();
             }
+            // OM INTE TAGET GÅ VIDARE
             else {
-                
+                // LÄGG IN ALLT I DATABASEN
                 $sql = "INSERT INTO forumusers (uFName, uLName, uName, uMail, uAdress, uPhone, uPass, uRole) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
                 $stmt = mysqli_stmt_init($conn);
                 if (!mysqli_stmt_prepare($stmt, $sql)){
@@ -59,9 +61,11 @@ if (isset($_POST['register_submit'])) {
                     exit();
                 }
                 else {
+                    // HASHA LÖSENORDET MED PASSWORD_HASH
                     $hshpass = password_hash($uPass, PASSWORD_DEFAULT);
-
+                    // BINDA VARIABLERNA TILL INFO SOM SKA IN I DATABASEN
                     mysqli_stmt_bind_param($stmt, "ssssssss", $uFName, $uLName, $uName, $uMail, $uAdress, $uPhone, $hshpass, $member);
+                    // EXECUTA ALLT
                     mysqli_stmt_execute($stmt);
                     header("Location: ../login.php?signup=success");
                     exit();
@@ -71,7 +75,7 @@ if (isset($_POST['register_submit'])) {
         }
 
     }
-
+// STÄNG CONNECTION OSV
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
 

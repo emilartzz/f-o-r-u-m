@@ -7,7 +7,7 @@ if (isset($_SESSION['uID'])) {
 }
 
 ?>
-
+<!-- STANDARD HTML -->
 <!DOCTYPE html>
 <html lang="sv">
 
@@ -47,7 +47,7 @@ if (isset($_SESSION['uID'])) {
     </header>
 
     <div class="container_register_login_contact">
-
+        <!-- SKAPA FORM FÖR ATT REGISTRERA -->
         <form action="./tools/register_db.php" method="post">
 
             <h4>Register</h4>
@@ -68,7 +68,7 @@ if (isset($_SESSION['uID'])) {
 
 
         </form>
-
+        <!-- BILD -->
         <img src="./img/register_illustration.svg" alt="Register illustration">
 
     </div>

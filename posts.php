@@ -1,11 +1,15 @@
-<?php session_start(); 
+<?php 
+// STARTA INFO
+session_start(); 
 
+// SKICKA UT ETT WATERMARK MED ANVÄNDARENS INFO
 require_once "tools/water_user.php";
 
+// KOLLA OM ANVÄNDARE INLOGGAD
 if (!isset($_SESSION['uID'])) {
     header('Location: ./login.php');
 }
-
+// KOLLA OM ANVÄNDAREN ÄR "DISABLED"
 require 'tools/check_account.php';
 
 $p_id;

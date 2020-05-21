@@ -1,11 +1,12 @@
 <?php session_start();
 
 require "tools/water_user.php";
-
+// KOLLA ANVÄNDARE INLOGG
 if (!isset($_SESSION['uID'])) {
     header('Location: ./login.php'); 
 }
 else {
+    // KOLLA SÅ ANVÄNDARE ÄR ADMIN
     if ($_SESSION['uRole'] != 1) {
         header('Location: ./dashboard.php'); 
     }
@@ -85,13 +86,8 @@ require 'tools/check_account.php';
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
-/*            echo "<table class='userTable'><tr><th>ID</th><th>Name</th></tr>";
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-            echo "<tr><td>" . $row["uID"] . "</td><td>" . $row["uFName"] . " " . $row["uLName"] . " " . $row["uName"] . " " . $row["uMail"] . " " . $row["uAdress"] . " " . $row["uPhone"] . " " . $row["uRole"] . "</td></tr>";
-            }
-            echo "</table>";*/
 
+            // SKRIV UT VARJE ANVÄNDARE I EN OPTION TILL DROPDOWN (SELECT)
             echo '<select name="admin_select_user" class="admin_select_user">';
             while ($row = $result->fetch_assoc()) {
                 echo '<option value="' . $row['uID'] . '">' . " [" . $row['uID'] . '] ' . $row['uName'] . '</option>';
@@ -118,10 +114,10 @@ require 'tools/check_account.php';
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
-
+            // SKRIV UT DISABLE USER SELECT
             echo '<select name="admin_select_user_2" class="disableUser">';
             while ($row = $result->fetch_assoc()) {
-
+                // KOLLA OM ANVÄNDAREN ÄR DISABLED ELLER INTE OCH GE FÄRG DÄREFTER
                 if ($row['uDisabled'] == 0) {
                     $uDisabledColor = "green";
                     $uDisabled = "Active";
@@ -130,7 +126,7 @@ require 'tools/check_account.php';
                     $uDisabledColor = "red";
                     $uDisabled = "Disabled";
                 }
-
+                // SKRIV UT VARJE ANVÄNDARE MED RÄTT FÄRG.
                 echo '<option style="color:' . $uDisabledColor . '" value="' . $row['uID'] . '">' . " [" . $uDisabled . '] ' . $row['uName'] . '</option>';
             }
             echo '</select> ';
@@ -140,7 +136,7 @@ require 'tools/check_account.php';
 }
             $conn->close();
             ?>
-
+        
             <button type="submit" name="a_disable" class="submit_disabled">Toggle</button>
             <button type="submit" name="a_delete" class="submit_delete">Delete</button>
 

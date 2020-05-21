@@ -1,5 +1,10 @@
-<?php session_start(); require_once "tools/water_user.php"; 
+<?php session_start(); 
 
+// WATERMARK STUFF
+require_once "tools/water_user.php"; 
+
+
+// KOLLA OM INLOGGAD
 if (isset($_SESSION['uID'])) {
     require 'tools/check_account.php';
 }
@@ -31,6 +36,7 @@ if (isset($_SESSION['uID'])) {
         <div class="nav_brand">
             <h1>F ─ O ─ R ─ U ─ M</h1>
             <?php 
+                // KOLLA OM ANVÄNDAREN ÄR INLOGGAD VISA ISÅFALL LOGOUT KNAPP OSV
                 if (!isset($_SESSION['uID'])) {
                     echo'
                     <ul class="nav">
@@ -42,6 +48,7 @@ if (isset($_SESSION['uID'])) {
                     </ul>
                     ';
                 }
+                // ANNARS VISAR MAN STANDARD
                 else {
                     echo'
                     <ul class="nav">
@@ -70,7 +77,8 @@ if (isset($_SESSION['uID'])) {
 
         <div class="landing_text">
 
-        <?php
+        <?php   
+                // KOLLA OM INLOGG IGEN, SKRIV UT STANDARD TEXT
                 if (!isset($_SESSION['uID'])) {
 
                 echo '
@@ -83,6 +91,7 @@ if (isset($_SESSION['uID'])) {
                 
                 echo '<a href="register.php">Join now!</a>';
                 }
+                // SKRIV UT WELCOME TEXT TILL ANVÄNDAREN SOM ÄR INLOGGAD
                 else {
                     echo '
                    <h2>Welcome ' . $_SESSION['uName'] . '!</h2>

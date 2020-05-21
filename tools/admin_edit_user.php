@@ -65,6 +65,7 @@
             echo '<input type="tel" name="auPhone" id="aPhone" placeholder="+46123456789" required value="' . $row["uPhone"] . '">';
 
             echo '<select name="aRole" id="aRole">';
+            // SÄTTER STANDARD VÄRDE PÅ SELECT DROPDOWN
             switch ($row['uRole']) {
                 case '1':
                     echo'

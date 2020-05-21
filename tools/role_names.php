@@ -1,4 +1,6 @@
 <?php
+
+    // ANGER NAMN TILL ROLES SÅSOM TYP MEMBER OSV
     if ($_SESSION['uRole'] === 0) {
         $role = '[Member]';
     }

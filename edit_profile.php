@@ -6,6 +6,8 @@ if (!isset($_SESSION['uID'])) {
 
 require 'tools/check_account.php';
 
+
+// SAME ¨
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +37,7 @@ require 'tools/check_account.php';
         <div class="nav_brand">
             <h1>F ─ O ─ R ─ U ─ M</h1>
 
-            <?php 
+            <?php // KOLLA OM INLOGG OSV
                 if (!isset($_SESSION['uID'])) {
                     echo'
                     <ul class="nav">
@@ -54,7 +56,7 @@ require 'tools/check_account.php';
                     <li><a href="forum.php">Forum</a></li>
                     <li><a href="contact.php">Contact</a></li>
                     <li><a href="';
-                    
+                    // KOLLA OM ADMIN ELLER "VANLIG" MEMBER
                     if ($_SESSION['uRole'] === 1){
                         echo'admin.php';
                     }
@@ -74,24 +76,27 @@ require 'tools/check_account.php';
     <div class="container_register_login_contact">
 
     <a class="go_dashboard_back" href="./dashboard.php">Back</a>
-
+        <!-- FORM -->
         <form action="./tools/submit_profile_changes_user.php" method="post">
 
             <h4>Edit Profile</h4>
             <p>Enter your details below</p>
 
             <?php 
- 
+            // KRÄV DB_CONN
             require "./tools/db_conn.php";
+            // SPARA SESSION VARIABELN
             $uID = $_SESSION['uID'];
+            // SELECT INFO FROM FORUMUSERS OSV
             $sql = "SELECT uID, uFName, uLName, uName, uMail, uAdress, uPhone, uPass, uRole FROM forumusers WHERE uID=$uID";
             $result = $conn->query($sql);
+            // SPARA INFO OCH KOLLA OM DET ÄR MER ÄN 0 RADER
             
 
             if ($result->num_rows > 0) {
 
                 $row = $result->fetch_assoc();
-
+            // SKRIV UT INFO OM ANVÄNDAREN.
             $_SESSION['auID'] = $row['uID'];
             $_SESSION['auName'] = $row['uName'];
             echo '<input class="flname" type="text" name="auFName" id="FName" placeholder="First name" required value="' . $row["uFName"] . '">';
@@ -102,7 +107,7 @@ require 'tools/check_account.php';
             echo '<input type="tel" name="auPhone" id="Phone" placeholder="+46123456789" required value="' . $row["uPhone"] . '">';
             }
             ?>
-
+            
             <button type="submit" name="submit_user_profile_changes">Confirm</button>
 
 

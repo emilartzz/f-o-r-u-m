@@ -1,11 +1,11 @@
 <?php
-
+// KOLLA OM MAN KLICKADE PÅ KNAPPEN "admin_submit_userchanges"
 if (isset($_POST['admin_submit_userchanges'])) {
 
     session_start();
  
     require "db_conn.php";
-
+    // SPARA ALLA VARIABLER
     $uID = $_SESSION['auID'];
     $ogName = $_SESSION['auName'];
     /* VARIABLER FRÅN TIDIGARE FORM */
@@ -21,18 +21,22 @@ if (isset($_POST['admin_submit_userchanges'])) {
     echo ' ' . $_SESSION['auID'] . ' ' . $uFName . ' ' . $uLName . ' ' . $uName . ' ' . $uMail . ' ' . $uAdress . ' ' . $uPhone . ' ' . $uRole;
     */
 
+    // KOLLA OM TOMMA VARIABLER FINNS
     if (empty($uFName) || empty($uLName) || empty($uName) || empty($uMail) || empty($uAdress) || empty($uPhone)){
         header("Location: ../admin.php?error=emptyFields&uid=" . $uName . "&mail=" . $uMail);
         exit();
     }
+    // KOLLA SÅ KORREKT BOKSTÄVER OSV ANVÄNDS
     else if (!filter_var($uMail, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9]*$/", $uName)){
         header("Location: ../admin.php?error=invalidmailuid");
         exit();
     }
+    // KOLLA SÅ DET ÄR EN MAIL
     else if (!filter_var($uMail, FILTER_VALIDATE_EMAIL)){
         header("Location: ../admin.php?error=invalidMail&uid=" . $uName);
         exit();
     }
+    // KOLLA BOKSTÄVER OSV IGEN
     else if (!preg_match("/^[a-zA-Z0-9]*$/", $uName)){
         header("Location: ../admin.php?error=invalidUname&mail=" . $uMail);
         exit();
@@ -42,11 +46,13 @@ if (isset($_POST['admin_submit_userchanges'])) {
         if ($uName != $ogName) {
             $sql = "SELECT uName FROM forumusers WHERE uName=?;";
             $stmt = mysqli_stmt_init($conn);
+            // KOLLA SÅ FUNKAR
             if (!mysqli_stmt_prepare($stmt, $sql)){
             header("Location: ../admin.php?error=sqlError1");
             exit();
-        }
-        else{
+            }
+            // FUNKAR DET KÖR DEN VIDARE
+            else{
             mysqli_stmt_bind_param($stmt, "s", $uName);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_store_result($stmt);
@@ -72,7 +78,7 @@ if (isset($_POST['admin_submit_userchanges'])) {
         }
     }
         else {
-            /* UPDATERAR INFO */
+            /* UPDATERAR ALL INFO */
             $sql = "UPDATE forumusers SET uFName='$uFName', uLName='$uLName', uName='$uName', uMail='$uMail', uAdress='$uAdress', uPhone='$uPhone', uRole='$uRole' WHERE uID='$uID'";
 
             if (mysqli_query($conn, $sql)) {

@@ -1,11 +1,11 @@
 <?php
-
+// KOLLAR SÅ KNAPP "submit_user_profile_changes" ÄR TRYCKT 
 if (isset($_POST['submit_user_profile_changes'])) {
 
     session_start();
  
     require "db_conn.php";
-
+    // VARIABLER
     $uID = $_SESSION['auID'];
     $ogName = $_SESSION['auName'];
     $uFName = $_POST['auFName'];
@@ -15,8 +15,8 @@ if (isset($_POST['submit_user_profile_changes'])) {
     $uAdress = $_POST['auAdress'];
     $uPhone = $_POST['auPhone'];
 
-    echo ' ' . $_SESSION['auID'] . ' ' . $uFName . ' ' . $uLName . ' ' . $uName . ' ' . $uMail . ' ' . $uAdress . ' ' . $uPhone;
-
+    // DEBUG echo ' ' . $_SESSION['auID'] . ' ' . $uFName . ' ' . $uLName . ' ' . $uName . ' ' . $uMail . ' ' . $uAdress . ' ' . $uPhone;
+    // KOLLAR SOM TIDIGARE ALLT OM DET MAN SKRIVIT IN OCH OM SAKER ÄR TOMMA OSV.
     if(empty($uFName) || empty($uLName) || empty($uName) || empty($uMail) || empty($uAdress) || empty($uPhone)){
         header("Location: ../edit_profile.php?error=emptyFields&uid=" . $uName . "&mail=" . $uMail);
         exit();
@@ -34,7 +34,7 @@ if (isset($_POST['submit_user_profile_changes'])) {
         exit();
     }
     else {
-
+        // KOLLAR ANVÄNDARNAMNBYTE
         if ($uName != $ogName) {
             $sql = "SELECT uName FROM forumusers WHERE uName=?;";
             $stmt = mysqli_stmt_init($conn);
@@ -52,7 +52,7 @@ if (isset($_POST['submit_user_profile_changes'])) {
                 exit();
             }
             else {
-                
+                // UPDATERAR INFO
                 $sql = "UPDATE forumusers SET uFName='$uFName', uLName='$uLName', uName='$uName', uMail='$uMail', uAdress='$uAdress', uPhone='$uPhone', uRole='$uRole' WHERE uID='$uID'";
 
                 if (mysqli_query($conn, $sql)) {
@@ -67,7 +67,7 @@ if (isset($_POST['submit_user_profile_changes'])) {
         }
     }
         else {
-            
+            // UPPDATERAR HURSOM
             $sql = "UPDATE forumusers SET uFName='$uFName', uLName='$uLName', uName='$uName', uMail='$uMail', uAdress='$uAdress', uPhone='$uPhone', uRole='$uRole' WHERE uID='$uID'";
 
             if (mysqli_query($conn, $sql)) {

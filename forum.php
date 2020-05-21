@@ -7,6 +7,7 @@ require_once "tools/water_user.php";
 if (!isset($_SESSION['uID'])) {
     header('Location: ./login.php'); 
 }
+// SAMMA SOM INNAN ^
 
 ?>
 
@@ -59,31 +60,26 @@ if (!isset($_SESSION['uID'])) {
         <div class="featured_posts">
 
             <?php
-
+            // KRÄV DB_CONN FILEN FÖR ATT KUNNA KOPPLA TILL DATABAS
             require "./tools/db_conn.php";
-            
+            // SELECT SAKER FÖR ATT KUNNA VISA POSTS
             $sql = "SELECT p_id , p_title, p_body, p_owner FROM forumposts";
+            // SPARA INFO
             $result = $conn->query($sql);
-
+            // OM RADER ÄR MER ÄN 0 GÖR DETTA
             if ($result->num_rows > 0) {
-            /*echo "<table class='userTable'><tr><th>ID</th><th>Name</th></tr>";
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-            echo "<tr><td>" . $row["uID"] . "</td><td>" . $row["uFName"] . " " . $row["uLName"] . " " . $row["uName"] . " " . $row["uMail"] . " " . $row["uAdress"] . " " . $row["uPhone"] . " " . $row["uRole"] . "</td></tr>";
-            }
-            echo "</table>";*/
-            //$row = $result->fetch_assoc();
-            //echo '<p class="p_desc">' . substr($row['p_body'], 0,50) . "...</p>";
+            // MATA UT ALLA POSTS
             while ($row = $result->fetch_assoc()) {
-                //echo ' ' . $row['p_id'] . ' ' . $row['p_title'] . ' ' . $row['p_body'] . ' ' . $row['p_owner'];
+
                 echo '<form action="./posts.php" method="get">';
                 echo '<div class="post_container">';
                 echo '<input type="text" name="posts_id" style="display: none;" value="' . $row['p_id'] . '">';
-                //echo '<p href="./posts.php" class="post_title">' . $row['p_title'] . '</a>';
+
                 echo '<button type="submit" name="show_post" class="post_title">' . $row['p_title'] . '</button>';
                 echo '<p class="post_desc">' . substr($row['p_body'], 0,50) . '...</p>';
                 echo '</div></form>';
             }
+            // SKRIV ANNARS UT "NO POSTS"
             } else {
             echo "No Posts";
             }
@@ -91,25 +87,6 @@ if (!isset($_SESSION['uID'])) {
             ?>
 
             </div>
-
-           <!-- <div class="featured_posts">
-                <div class="post_container">
-                    <a href="#" class="post_title">Post title goes here</a>
-                    <p class="post_desc">Post desc goes here</p>
-
-                    <p class="post_owner">Post owner id goes here</p>
-
-
-                </div>
-
-
-                <div class="post_container">
-                    <a href="#" class="post_title">Post title goes here</a>
-                    <p class="post_desc">Post desc goes here</p>
-
-
-                </div>
-            </div> -->
 
 
     </div>
