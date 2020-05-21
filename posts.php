@@ -1,10 +1,14 @@
-<?php session_start(); require_once "tools/water_user.php";
+<?php session_start(); 
+
+require_once "tools/water_user.php";
 
 if (!isset($_SESSION['uID'])) {
     header('Location: ./login.php');
 }
 
 require 'tools/check_account.php';
+
+$p_id;
 
 
 ?>
@@ -70,37 +74,85 @@ require 'tools/check_account.php';
 
     <div class="show_post_container">
 
-    <div class="featured_posts">
+        <div class="selected_post">
 
-<?php
+            <?php
 
-require "./tools/db_conn.php";
+            require_once "./tools/db_conn.php";
 
-$sql = "SELECT  p_id, p_title, p_body, p_owner FROM forumposts WHERE p_id=" . $_GET['posts_id'] . ";";
-$result = $conn->query($sql);
+            $p_id = $_GET['posts_id'];
 
-if ($result->num_rows > 0) {
+            $sql = "SELECT  p_id, p_title, p_body, p_owner FROM forumposts WHERE p_id=" . $_GET['posts_id'] . ";";
+            $result = $conn->query($sql);
 
-$row = $result->fetch_assoc();
+            if ($result->num_rows > 0) {
 
-    echo '<form action="./edit_post.php" method="get">';
-    echo '<input type="text" name="posts_id" style="display: none;" value="' . $row['p_id'] . '">';
-    echo '<div class="post_container">';
-    echo '<a href="#" class="post_title">' . $row['p_title'] . '</a>';
-    echo '<p class="post_body">' . $row['p_body'] . '</p>';
-    if ($row['p_owner'] == $_SESSION['uID'] || $_SESSION['uRole'] == 1) {
-        echo '<button type="submit" name="edit_post" class="edit_post">Edit Post</button>';
-        echo '<button type="submit" name="del_post" class="del_post">Delete Post</button>';   
-    }
-    echo '</div></form>';
+            $row = $result->fetch_assoc();
 
-} else {
-echo "No Posts";
-}
-$conn->close();
-?>
+                echo '<form action="./edit_post.php" method="get">';
+                echo '<input type="text" name="posts_id" style="display: none;" value="' . $row['p_id'] . '">';
+                echo '<div class="post_container">';
+                echo '<a href="#" class="post_title">' . $row['p_title'] . '</a>';
+                echo '<p class="post_body">' . $row['p_body'] . '</p>';
+                if ($row['p_owner'] == $_SESSION['uID'] || $_SESSION['uRole'] == 1) {
+                    echo '<button type="submit" name="edit_post" class="edit_post">Edit Post</button>';
+                    echo '<button type="submit" name="del_post" class="del_post">Delete Post</button>';   
+                }
+                echo '</div></form>';
 
-</div>
+            } else {
+            echo "No Posts";
+            }
+            ?>
+
+        </div>
+
+    </div>
+
+    <div class="comments">
+
+        <?php
+
+        require_once "./tools/db_conn.php";
+                    
+        $sql = "SELECT cID, cOwner, cBody, cPost FROM forumcomments WHERE cPost=";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+
+        while ($row = $result->fetch_assoc()) {
+           
+            echo '<form action="./edit_post.php" method="get">';
+            echo '<input type="text" name="posts_id" style="display: none;" value="' . $row['p_id'] . '">';
+            echo '<div class="post_container">';
+            echo '<a href="#" class="post_title">' . $row['p_title'] . '</a>';
+            echo '<p class="post_body">' . $row['p_body'] . '</p>';
+            if ($row['p_owner'] == $_SESSION['uID'] || $_SESSION['uRole'] == 1) {
+                echo '<button type="submit" name="edit_post" class="edit_post">Edit Post</button>';
+                 echo '<button type="submit" name="del_post" class="del_post">Delete Post</button>';   
+            }
+            echo '</div></form>';
+        }
+        } else {
+        echo "No Comments";
+        }
+
+        ?>
+
+        <div class="add_comment">
+        
+            <form action="./tools/post_comment.php" method="get">
+            
+                <input type="text" name="cID" value="<?php echo $_SESSION['uID']; ?>" style="display: none;">
+
+                <textarea name="cBody" id="" cols="50" rows="4"></textarea>
+
+                <button type="submit" name="submit_comment">Submit</button>
+            
+            
+            </form>
+        
+        </div>
 
     </div>
 

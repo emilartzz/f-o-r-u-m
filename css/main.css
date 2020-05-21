@@ -325,11 +325,20 @@ header {
 
 .featured_posts{
     background-color: rgba(202, 202, 202, 0.2);
-    width: 70vw;
+    width: 75vw;
     position: absolute;
     top: 30vh;
-    left: 15%;
-    border-radius: 10px 10px 0 0;
+    left: 10vw;
+    border-radius: 10px;
+}
+
+.selected_post{
+    background-color: rgba(202, 202, 202, 0.2);
+    width: 50vw;
+    position: absolute;
+    top: 30vh;
+    left: 10vw;
+    border-radius: 10px;
 }
 
 .post_container{
@@ -532,4 +541,55 @@ header {
     text-decoration: none;
     margin: 10px 0px;
     cursor: pointer;
+}
+
+/* COMMENTS */
+
+.comments{
+    background-color: rgba(202, 202, 202, 0.2);
+    width: 35vw;
+    height: 60vh;
+    position: absolute;
+    top: 30vh;
+    left: 61vw;
+    border-radius: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.add_comment{
+
+}
+
+.add_comment textarea{
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 12px 12px 12px 12px;
+    transition: all ease-in-out .2s;
+    color: #3F3D56 ;
+    resize: none;
+    display: block;
+    margin: 10px 0 0 20px;
+    font-family: 'Roboto', 'FontAwesome', sans-serif;
+    outline: none;
+    display: inline;
+}
+
+.add_comment button{
+    background-color: #3F3D56;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    color: white;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 12px 12px;
+    text-decoration: none;
+    margin: 0px 0px;
+    cursor: pointer;
+    display: inline;
 }
